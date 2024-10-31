@@ -1,11 +1,15 @@
 import React from 'react';
 import Button from '../component/button';
 import TextInput from '../component/text-input';
+import Image from '../assets/images/spring-credit.jpg';
+import { Link } from 'react-router-dom';
+
+
 function Login() {
     return (
         <>
-        <section className="flex flex-col gap-8 items-center justify-center mx-auto lg:mt-20 lg:w-[40%]">
-            <img src="spring-credit.jpg" alt="spring credit logo" className="lg:w-[200px]" />
+        <section className="flex flex-col gap-8 items-center justify-center mt-10 md:mx-auto mx-5 lg:mt-20 md:mt-20 md:w-[60%] lg:w-[40%]">
+            <img src={Image} alt="spring credit logo" className="lg:w-[200px]" />
             <p className='text-base'>Log in to your Spring Credit account</p>
             <form className="w-full flex flex-col gap-[18px]">
                 <div className='flex flex-col gap-5'>
@@ -17,7 +21,7 @@ function Login() {
                 <Button text="Log in"/>
                 </div>  
             </form>
-            <p>No account? <span className='font-semibold cursor-pointer'>Sign Up for free </span> </p>
+            <p>No account? <Link className='font-semibold cursor-pointer' to="/auth/register">Sign Up for free</Link> </p>
         </section>
         </>
 
