@@ -10,7 +10,7 @@ const transactions = [
 
 const RecentTransactions = () => {
   return (
-    <div className="max-w-4xl  my-8 p-6 bg-white rounded-lg shadow-lg">
+    <div className="max-w-4xl mx-auto my-8 p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-6">Recent Transactions</h2>
       <div className="space-y-4">
         {transactions.map((transaction) => (
