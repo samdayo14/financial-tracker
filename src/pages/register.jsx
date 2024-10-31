@@ -27,7 +27,7 @@ function Register(){
 
             <form className="flex flex-col gap-[18px]"  onSubmit={handleSubmit(onSubmit)}>
                 <div className='flex gap-4'>
-                <TextInput label="First Name" type='text' name="name" validation={{ required: 'First Name is required' }} 
+                <TextInput label="First Name" type='text' name="FirstName" validation={{ required: 'First Name is required' }} 
                 />
                 <TextInput label="Last Name" type='text' name="name" validation={{ required: 'Last Name is required' }} 
  />
@@ -36,7 +36,7 @@ function Register(){
                 />
                 <TextInput label="Password"  type="password" name="password" validation={{ required: 'Password is required' }} 
  />
-                <TextInput label="Confirm Password"  type="password" name="password"  validation={{ required: 'Confirm Password is required' }} 
+                <TextInput label="Confirm Password"  type="password" name="ConfirmPassword"  validation={{ required: 'Confirm Password is required' }} 
  />
                 <Button text="Sign Up"/>
             </form>
