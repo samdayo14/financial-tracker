@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
-function TextInput({ label, type = 'text', required = false }) {
+function TextInput({ label, type, name, validation }) {
+    const { register, formState: { errors } } = useFormContext();
     const [inputType, setInputType] = useState(type);
     const isPassword = type === 'password';
 
@@ -9,17 +11,17 @@ function TextInput({ label, type = 'text', required = false }) {
     };
 
     return (
-        <div className="relative">
+        <div className="relative mb-2">
             <input
                 type={inputType}
                 id={label}
                 placeholder=" "
-                required={required}
-                className="input-style peer pr-10" 
+                className={`input-style peer pr-10 ${errors[name] ? 'border-red-500' : ''}`}
+                {...register(name, validation)} 
             />
             <label
                 htmlFor={label}
-                className="input-label"
+                className="input-label" 
             >
                 {label}
             </label>
@@ -33,6 +35,10 @@ function TextInput({ label, type = 'text', required = false }) {
                     {inputType === 'password' ? 'Show' : 'Hide'}
                 </button>
             )}
+
+                {errors[name] && (
+                <span className="text-red-500 text-xs my-1 absolute">{errors[name].message}</span>
+                )}
         </div>
     );
 }
