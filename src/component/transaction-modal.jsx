@@ -7,7 +7,6 @@ import {  toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const TransactionModal = ({ closeModal, transaction }) => {
-    // const { addTransactions } = useContext(TransactionContext);
     const methods = useForm({
         defaultValues: {
           date: transaction ? transaction.date : '',
