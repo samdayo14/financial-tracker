@@ -1,30 +1,44 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import TextInput from './text-input';
-import Button from './button';  
-import { useForm, FormProvider } from 'react-hook-form'; 
+import Button from './button';
+import { useForm, FormProvider } from 'react-hook-form';
 import { TransactionContext } from '../context/transactions';
+import {  toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const TransactionModal = ({ closeModal }) => {
-    const { addTransactions } = useContext(TransactionContext); 
-    const [description, setDescription] = useState('');
-    const [amount, setAmount] = useState('');
-    const methods = useForm(); 
-    const { handleSubmit } = methods; 
+const TransactionModal = ({ closeModal, transaction }) => {
+    // const { addTransactions } = useContext(TransactionContext);
+    const methods = useForm({
+        defaultValues: {
+          date: transaction ? transaction.date : '',
+          category: transaction ? transaction.category : '',
+          description: transaction ? transaction.description : '',
+          amount: transaction ? transaction.amount : '',
+        },
+      }); 
+    const { handleSubmit, register } = methods; 
+
+    const { addTransactions, editTransactions } = useContext(TransactionContext);
 
     const onSubmit = (data) => {
-        const newTransaction = {
-            id: Math.random(),
-            description,
-            amount,
-            date: data.date, // Example usage of date from form data
-            category: data.category // Example usage of category from form data
-        };
+      const newTransaction = {
+        id: transaction ? transaction.id : Math.random(),
+        description: data.description,
+        amount: parseFloat(data.amount),
+        date: data.date,
+        category: data.category,
+      };
+    
+      if (transaction) {
+        editTransactions(newTransaction);
+        toast.success("Transaction edited successfully!");
+      } else {
         addTransactions(newTransaction);
-        setDescription('');
-        setAmount('');
-        closeModal();
+        toast.success("Transaction added successfully!");
+      }
+      closeModal();
     };
-
+    
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div className="bg-white rounded-lg p-6 w-11/12 max-w-lg">
@@ -37,10 +51,12 @@ const TransactionModal = ({ closeModal }) => {
                                 type="date"
                                 name="date"
                                 validation={{ required: 'Date is required' }}
+                                {...register('date', { required: 'Date is required' })}
                             />
                             <select
                                 className="input-style h-12 lg:w-[50%]"
-                                {...methods.register('category', { required: 'Category is required' })}
+                                validation={{ required: 'Category is required' }}
+                                {...register('category', { required: 'Category is required' })}
                             >
                                 <option value="">Select Category</option>
                                 <option value="Food">Food</option>
@@ -52,18 +68,21 @@ const TransactionModal = ({ closeModal }) => {
                             type="text"
                             name="description"
                             label="Description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
                             validation={{ required: 'Description is required' }}
+                            {...register('description', { required: 'Description is required' })}
                         />
+                        <div className='flex flex-col gap-1'>
+                            <span className='text-red-600 text-xs'>
+                                Please prepend a '-' sign to the amount for any expense entries to differentiate them from income figures.
+                            </span>
                         <TextInput
                             type="number"
                             name="amount"
                             label="Amount"
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
                             validation={{ required: 'Amount is required' }}
+                            {...register('amount', { required: 'Amount is required' })}
                         />
+                        </div>
                         <div className="flex justify-end gap-4 mt-4">
                             <button
                                 type="button"
@@ -81,4 +100,4 @@ const TransactionModal = ({ closeModal }) => {
     );
 };
 
-export default TransactionModal;
+export default TransactionModal; 

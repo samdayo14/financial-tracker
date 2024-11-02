@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
+import { Routes, Route } from 'react-router-dom'; 
 import Dashboard from './pages/dashboard';
 import Login from './pages/login';
 import Register from './pages/register';
@@ -7,6 +7,8 @@ import Transactions from './pages/transactions';
 import Budgets from './pages/budget';
 import Settings from './pages/settings';
 import './App.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
       <div className='flex gap-10'>
         <Navbar className='lg:w-[20%]' />
         <div className='lg:w-[80%] overflow-y-auto'>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+
           <Routes>
             {' '}
             {/* Directly use Routes here without Router */}
