@@ -24,7 +24,7 @@ const nav = [
 ]
 
   return (
-    <div className="fixed top-0 right-0 h-full w-64 bg-primary shadow-lg transition-transform duration-300 ease-in-out overflow-hidden">
+    <div className="fixed top-0 right-0 h-full w-64 bg-primary shadow-lg transition-transform duration-300 ease-in-out overflow-hidden hidden lg:block">
       <h2 className="text-white text-2xl font-bold text-center mt-4">Spring Credit</h2>
       <ul className="mt-8 space-y-4 px-4">
         {nav.map((item,index) => (

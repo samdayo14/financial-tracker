@@ -15,16 +15,19 @@ const SettingsPage = () => {
       <h1 className="text-3xl font-bold mb-6">Settings</h1>
 
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className="bg-white p-6 rounded-lg shadow-md space-y-4">
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="bg-white p-6 rounded-lg shadow-md  space-y-4">
           {/* Name */}
-          <div>
-            <TextInput
-              label="Name"
-              type="text"
-              name="name"
-              validation={{ required: 'Name is required' }}
-            />
-          </div>
+          <div className='flex gap-4'>
+            <div className='w-1/2'>
+                <TextInput label="First Name" type='text' name="FirstName" validation={{ required: 'First Name is required' }} 
+                />
+            </div>
+                <div className='ml-auto w-1/2'>
+
+                <TextInput label="Last Name" type='text' name="name" validation={{ required: 'Last Name is required' }} 
+ />
+                </div>
+                </div>
 
           {/* Email */}
           <div>
